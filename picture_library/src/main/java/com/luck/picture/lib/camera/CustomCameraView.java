@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -82,6 +83,7 @@ public class CustomCameraView extends RelativeLayout {
     private ImageView mImagePreview;
     private ImageView mSwitchCamera;
     private ImageView mFlashLamp;
+    private ImageView mCloseImg;
     private CaptureLayout mCaptureLayout;
     private MediaPlayer mMediaPlayer;
     private TextureView mTextureView;
@@ -120,6 +122,13 @@ public class CustomCameraView extends RelativeLayout {
                 type_flash = TYPE_FLASH_AUTO;
             setFlashRes();
         });
+        mCloseImg=view.findViewById(R.id.image_close);
+        mCloseImg.setOnClickListener(v -> {
+            if (mOnClickListener != null) {
+                mOnClickListener.onClick();
+            }
+        });
+
         mCaptureLayout = view.findViewById(R.id.capture_layout);
         mCaptureLayout.setDuration(15 * 1000);
         //切换摄像头
@@ -130,6 +139,7 @@ public class CustomCameraView extends RelativeLayout {
             public void takePictures() {
                 mSwitchCamera.setVisibility(INVISIBLE);
                 mFlashLamp.setVisibility(INVISIBLE);
+                mCloseImg.setVisibility(INVISIBLE);
                 mCameraView.setCaptureMode(androidx.camera.view.CameraView.CaptureMode.IMAGE);
                 File imageOutFile = createImageFile();
                 if (imageOutFile == null) {
@@ -503,8 +513,9 @@ public class CustomCameraView extends RelativeLayout {
             }
         }
         mSwitchCamera.setVisibility(VISIBLE);
-        mFlashLamp.setVisibility(VISIBLE);
+//        mFlashLamp.setVisibility(VISIBLE);
         mCameraView.setVisibility(View.VISIBLE);
+        mCloseImg.setVisibility(VISIBLE);
         mCaptureLayout.resetCaptureLayout();
     }
 
@@ -547,4 +558,6 @@ public class CustomCameraView extends RelativeLayout {
         }
         mTextureView.setVisibility(View.GONE);
     }
+
+
 }

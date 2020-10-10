@@ -1,15 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <FrameLayout
+        android:id="@+id/image_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/picture_color_black">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="照片"
+            android:textColor="@color/picture_color_white"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/image_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
+            android:layout_marginTop="10dp"
+            android:padding="15dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/picture_ic_camera" />
+
+        <ImageView
+            android:id="@+id/image_flash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@id/image_switch"
+            android:padding="15dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/picture_ic_flash_on"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/image_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="10dp"
+            android:padding="15dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/picture_icon_close" />
+
+
+    </FrameLayout>
+
     <androidx.camera.view.CameraView
         android:id="@+id/cameraView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/image_bottom"
+        android:layout_below="@+id/image_title" />
 
     <com.luck.picture.lib.photoview.PhotoView
         android:id="@+id/image_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/image_bottom"
+        android:layout_below="@+id/image_title"
         android:layout_centerInParent="true"
         android:scaleType="centerCrop"
         android:visibility="invisible" />
@@ -18,36 +71,29 @@
         android:id="@+id/video_play_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/image_bottom"
+        android:layout_below="@+id/image_title"
         android:layout_centerInParent="true"
         android:visibility="gone" />
 
 
-    <ImageView
-        android:id="@+id/image_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="right"
-        android:layout_marginTop="10dp"
-        android:padding="15dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/picture_ic_camera" />
-
-    <ImageView
-        android:id="@+id/image_flash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_toLeftOf="@id/image_switch"
-        android:padding="15dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/picture_ic_flash_on" />
-
-
-    <com.luck.picture.lib.camera.view.CaptureLayout
-        android:id="@+id/capture_layout"
+    <LinearLayout
+        android:id="@+id/image_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:background="@color/picture_color_black"
+        android:orientation="vertical">
+
+        <com.luck.picture.lib.camera.view.CaptureLayout
+            android:id="@+id/capture_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            />
+
+    </LinearLayout>
 
 </merge>
